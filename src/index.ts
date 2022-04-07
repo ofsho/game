@@ -37,10 +37,12 @@ function createGrid(x: number,y: number, value: string) {
 }
 
 function render() {
-	const preHTML: string[][] = [];
+	const preHTML: any[] = [];
 	const html: string[] = [];
 
 	console.log("Rendered")
+
+	console.log(board)
 
 	board.forEach(function (row, y) {
 		const html_row: string[] = [];
@@ -54,18 +56,17 @@ function render() {
 	
 	preHTML.forEach(function (v) {
 		let htm = v.join("")
-		console.log(preHTML)
-		html.push(`<tr>${htm}</tr>`)
+		if (v.length > 0) html.push(`<tr>${htm}</tr>`) // wtf is this workaround
 	})
 
 	container.innerHTML = html.join("")
 
-	
+	preHTML.forEach(function (row: any, y: number) {
+		row.forEach(function(item: any , x: number) {})
+	})
 
 	board.forEach(function (row, y) {
-		row.forEach((item, x) => {
-			console.log("loler")
-		})
+		row.forEach((item, x) => {})
 	})
 }
 
