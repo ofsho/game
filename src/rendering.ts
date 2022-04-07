@@ -117,7 +117,6 @@ export function render(board: any, container: any, select: Cell) {
 				cmenu.getElementsByClassName("delete")[0].addEventListener('click', () => {
 					// set the element value to blank save code
 					board[y][x] = emptyCell;
-					console.log()
 					cmenu.classList.remove("visible");
 					render(board, container, select); // dont forget to re-render :lol: but this causes lag so use barebone
 				}, false);

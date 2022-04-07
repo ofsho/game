@@ -30,6 +30,28 @@ body {
 	user-select: none;
 }
 
+.sidebar {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	float: left;
+
+	height: 100%;
+	width: 15%;
+
+	background-color: #333;
+
+	#title {
+		font-family: 'Fredoka', sans-serif;
+		font-size: 2em;
+		text-align: center;
+		margin-top: 10px;
+		color: #fff;
+		padding: 10px;
+	}
+}
+
 .cmenu {
 	position: fixed;
 	z-index: 1000;

@@ -42,4 +42,4 @@ export function cellLookup(x: number, y: number) {
 	return board[y][x]
 }
 
-render(board, container, select)
+if (container != null) render(board, container, select)
