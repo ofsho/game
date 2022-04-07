@@ -1,5 +1,13 @@
-module.exports = class Cell {
-	constructor (ns, name, image, display_name, callback) {
+import { URL } from "./types"
+
+export default class Cell {
+	constructor (
+		ns: string,
+		name: string,
+		image: URL,
+		display_name,
+		callback
+	) {
 		this.namespace = ns
 		this.name = name
 		this.image = image

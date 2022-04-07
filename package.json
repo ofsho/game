@@ -15,8 +15,8 @@
     "json"
   ],
   "repository": {
-	"type": "git",
-	"url": "git+https://github.com/Schematell/game.git"
+    "type": "git",
+    "url": "git+https://github.com/Schematell/game.git"
   },
   "author": "Schematell",
   "license": "MIT",
@@ -24,6 +24,8 @@
     "css-loader": "^6.7.1",
     "sass": "^1.49.11",
     "sass-loader": "^12.6.0",
+    "ts-loader": "^9.2.8",
+    "typescript": "^4.6.3",
     "webpack": "^5.71.0",
     "webpack-cli": "^4.9.2"
   },
