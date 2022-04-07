@@ -2,10 +2,10 @@
 const container = document.getElementById("container");
 const Cell = require("./cells.js");
 const cells = [
-	new Cell("st", "mover", "./../img/cells/mover.png", "pass"),
-	new Cell("st", "enemy", "./../img/cells/enemy.png", "pass"),
-	new Cell("st", "generator", "./../img/cells/generator.png", "pass"),
-	new Cell("st", "rotator", "./../img/cells/rotator.png", "pass")
+	new Cell("st", "mover", "./../resources/cells/mover.png", "pass"),
+	new Cell("st", "enemy", "./../resources/cells/enemy.png", "pass"),
+	new Cell("st", "generator", "./../resources/cells/generator.png", "pass"),
+	new Cell("st", "rotator", "./../resources/cells/rotator.png", "pass")
 ]
 let select = cells[0];
 
@@ -52,7 +52,7 @@ function tokenizeElement(ele) {
 	return token
 }
 
-const board = createGrid(16,16,"st|blank|./../img/cells/default.png");
+const board = createGrid(16,16,"st|blank|./../resources/cells/default.png");
 
 function render() {
 	// instantiate a basic HTML array
@@ -84,7 +84,7 @@ function render() {
 			// fun code V
 			const tokenize = tokenizeElement(item); // tokenize the element value in board
 			const element = document.getElementById(`cell-${y}-${x}`) // get corresponding element in the DOM
-			element.innerHTML = `<img src="${tokenize[2].value}" onerror="this.src='./../img/ohshit.png'" class="cell">` // set the element's innerHTML to the image
+			element.innerHTML = `<resources src="${tokenize[2].value}" onerror="this.src='./../resources/ohshit.png'" class="cell">` // set the element's innerHTML to the image
 			
 			// element functionality
 			element.addEventListener('click', function(ev) {
@@ -109,11 +109,11 @@ function cellLookup(x,y) {
 }
 
 // testing fallback
-board[0][0] = "st|mover|./../img/cells/mover.png";
-board[0][1] = "st|gener|./../img/cells/generator.png";
-board[0][2] = "st|rotat|./../img/cells/rotator.png";
+board[0][0] = "st|mover|./../resources/cells/mover.png";
+board[0][1] = "st|gener|./../resources/cells/generator.png";
+board[0][2] = "st|rotat|./../resources/cells/rotator.png";
 
-board[1][2] = "st|enemy|./../img/cells/enemy.png";
+board[1][2] = "st|enemy|./../resources/cells/enemy.png";
 
 console.log(cellLookup(1,2))
 
