@@ -2,18 +2,20 @@
 // imports
 
 import Cell from "./cells";
-import { ImageURI, DefaultScript } from "./types";
+import { render } from "./rendering";
+import { DefaultScript, CellDirection } from "./types";
 import { minifyJSON } from "./utils";
 
 // variables
 const container: HTMLElement  = document.getElementById("container");
-const cmenu: HTMLElement = document.getElementById("cmenu");
-const board = createGrid(16,16, `st|blank|./../img/cells/default.png|Empty|${minifyJSON(JSON.stringify(DefaultScript))}`)
+const emptyCell = `st|||blank|||./../img/cells/default.png|||Empty|||${minifyJSON(JSON.stringify(DefaultScript))}`
+
+const board = createGrid(16,16, emptyCell)
 const cells: Cell[] = [
-	new Cell("st", "mover", "./../img/cells/mover.png", "Mover", DefaultScript),
-	new Cell("st", "enemy", "./../img/cells/enemy.png", "Enemy", DefaultScript),
-	new Cell("st", "generator", "./../img/cells/generator.png", "Generator", DefaultScript),
-	new Cell("st", "rotator", "./../img/cells/rotator.png", "Rotator", DefaultScript),
+	new Cell("st", "mover", "./../img/cells/mover.png", "Mover", CellDirection.right, DefaultScript),
+	new Cell("st", "enemy", "./../img/cells/enemy.png", "Enemy", CellDirection.right, DefaultScript),
+	new Cell("st", "generator", "./../img/cells/generator.png", "Generator", CellDirection.right, DefaultScript),
+	new Cell("st", "rotator", "./../img/cells/rotator.png", "Rotator", CellDirection.right, DefaultScript),
 ]
 let select: Cell = cells[0];
 
@@ -36,42 +38,8 @@ function createGrid(x: number,y: number, value: string) {
 	return grid;
 }
 
-function render() {
-	const preHTML: any[] = [];
-	const html: string[] = [];
-
-	console.log("Rendered")
-
-	console.log(board)
-
-	board.forEach(function (row, y) {
-		const html_row: string[] = [];
-		preHTML.push([])
-		row.forEach((item, x) => {
-			const element = item.split("|");
-			html_row.push(`<td id="cell-${y}-${x}"><img src="${element[2]}" onerror="this.src='./../img/ohshit.png'" class="cell"></td>`);
-		})
-		preHTML.push(html_row)
-	})
-	
-	preHTML.forEach(function (v) {
-		let htm = v.join("")
-		if (v.length > 0) html.push(`<tr>${htm}</tr>`) // wtf is this workaround
-	})
-
-	container.innerHTML = html.join("")
-
-	preHTML.forEach(function (row: any, y: number) {
-		row.forEach(function(item: any , x: number) {})
-	})
-
-	board.forEach(function (row, y) {
-		row.forEach((item, x) => {})
-	})
-}
-
-function cellLookup(x: number, y: number) {
+export function cellLookup(x: number, y: number) {
 	return board[y][x]
 }
 
-render()
+render(board, container, select)

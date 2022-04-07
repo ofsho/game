@@ -1,4 +1,4 @@
-import { SchemeScript, ImageURI } from "./types";
+import { SchemeScript, ImageURI, CellDirection } from "./types";
 import { minifyJSON } from "./utils";
 
 export default class Cell {
@@ -7,11 +7,12 @@ export default class Cell {
 		public name: string,
 		public image: ImageURI,
 		public display_name: string,
+		public rotation: CellDirection,
 		public callback: SchemeScript
 	) {}
 
 	export () {
 		// Exported in the SchemeToken format
-		return `${this.namespace}|${this.name}|${this.image}|${this.display_name}|${minifyJSON(JSON.stringify(this.callback))}`
+		return `${this.namespace}|||${this.name}|||${this.image}|||${this.display_name}|||${this.rotation}|||${minifyJSON(JSON.stringify(this.callback))}`
 	}
 }
