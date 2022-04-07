@@ -8,13 +8,16 @@ export function etf2html(etf: string) {
 		let element = lines[i];
 		let modified = "";
 		if (element.startsWith("**") && element.endsWith("**")) {
-			modified = element.substring(2)
-			modified = element.substring(modified.length - 3, modified.length - 1)
-			modified = `<strong>${modified}</strong>`
+			modified = element.slice(2, -2)
+			modified = `<br><strong>${modified}</strong><br>`
 			compiled.push(modified)
 			continue
 		} else if (element.startsWith("\n")) {
 			modified = `<br>`
+			compiled.push(modified)
+			continue
+		}else if (element.startsWith("-")) {
+			modified = `${element}<br>`
 			compiled.push(modified)
 			continue
 		}else if (element.startsWith("##")) {
@@ -24,7 +27,7 @@ export function etf2html(etf: string) {
 			continue
 		}else if (element.startsWith("#")) {
 			modified = element.substring(1)
-			modified = `<p class="purple">${modified}</p>`
+			modified = `<strong><p class="purple">${modified}</p></strong>`
 			compiled.push(modified)
 			continue
 		}else {
