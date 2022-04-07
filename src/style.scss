@@ -42,7 +42,7 @@ body {
 
 	transform: scale(0);
 	transform-origin: top left;
-	transition: transform 300ms ease-in;
+	transition: transform 200ms ease-in;
 
 	border: #000 1px;
 
@@ -68,6 +68,6 @@ body {
 
 	&.visible {
 		transform: scale(1);
-		transition: transform 500ms ease-out;
+		transition: transform 200ms ease-out;
 	}
 }

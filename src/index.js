@@ -7,12 +7,39 @@ const cells = [
 	new Cell("st", "mover", "./../img/cells/mover.png", "Mover", "pass"),
 	new Cell("st", "enemy", "./../img/cells/enemy.png", "Enemy", "pass"),
 	new Cell("st", "generator", "./../img/cells/generator.png", "Generator", "pass"),
-	new Cell("st", "rotator", "./../img/cells/rotator.png", "Rotator", "pass")
+	new Cell("st", "rotator", "./../img/cells/rotator.png", "Rotator", "pass"),
 ]
 const cmenu = document.getElementById("cmenu");
 let select = cells[0];
 
 // functions
+
+// overly complex tokenizing function that I refuse to comment
+function tokenizeElement(ele) {
+	const split = ele.split("|");
+	const token = [];
+	for (let i = 0; i < split.length; i++) {
+		const element = split[i];
+		switch (i) {
+			case 0:
+				token.push({type: "namespace", value: element});
+				break;
+			case 1:
+				token.push({type: "name", value: element});
+				break;
+			case 2:
+				token.push({type: "image", value: element});
+				break;
+			default:
+				throw new Error(`Syntax Error: Unexpected token \'${element}\'`)
+		}
+	}
+
+	return token
+}
+
+const board = createGrid(16,16,"st|blank|./../img/cells/default.png");
+
 function createGrid(x,y,value) {
 	// create a basic 2d grid
 	const grid = [];
@@ -31,34 +58,9 @@ function createGrid(x,y,value) {
 	return grid;
 }
 
-// overly complex tokenizing function that I refuse to comment
-function tokenizeElement(ele) {
-	const split = ele.split("|");
-	const token = [];
-	for (let i = 0; i < split.length; i++) {
-		const element = split[i];
-		switch (i) {
-			case 0:
-				token.push({type: "namespace", value: element});
-				break;
-			case 1:
-				token.push({type: "save_code", value: element});
-				break;
-			case 2:
-				token.push({type: "image", value: element});
-				break;
-			default:
-				throw new Error(`Syntax Error: Unexpected token \'${element}\'`)
-		}
-	}
-
-	return token
-}
-
-const board = createGrid(16,16,"st|blank|./../img/cells/default.png");
-
-function render() {
+function barebone_render() {
 	// instantiate a basic HTML array
+	console.log("Barebone render initiated")
 	const html = [];
 	const ele = 0;
 	let i = 0;
@@ -87,15 +89,25 @@ function render() {
 			// fun code V
 			const tokenize = tokenizeElement(item); // tokenize the element value in board
 			const element = document.getElementById(`cell-${y}-${x}`) // get corresponding element in the DOM
+			console.log(element)
 			element.innerHTML = `<img src="${tokenize[2].value}" onerror="this.src='./../img/ohshit.png'" class="cell">` // set the element's innerHTML to the image
-			
+		})
+	})
+}
+
+function render() {
+	console.log("Main render initiated")
+	barebone_render()
+
+	board.forEach(function (row, y) {
+		row.forEach((item, x) => {
 			// element functionality
 			element.addEventListener('click', function(ev) {
 				// set the element value to select save code
 				board[y][x] = select.export();
 
 				// rerender the board
-				render();
+				barebone_render();
 			}, false);
 
 			element.addEventListener('contextmenu', function(ev) {
@@ -126,7 +138,7 @@ function render() {
 					// set the element value to blank save code
 					board[y][x] = "st|blank|./../img/cells/default.png";
 					cmenu.classList.remove("visible");
-					render(); // dont forget to re-render :lol:
+					barebone_render(); // dont forget to re-render :lol: but this causes lag so use barebone
 				}, false);
 
 				cmenu.getElementsByClassName("modify")[0].addEventListener('click', () => {
