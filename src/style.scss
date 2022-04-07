@@ -30,6 +30,15 @@ body {
 	user-select: none;
 }
 
+@keyframes mover {
+	0%, 100% {
+		transform: skewY(3deg);
+	}
+	50% {
+		transform: skewY(-3deg);
+	}
+}
+
 .sidebar {
 	position: fixed;
 	top: 0;
@@ -42,14 +51,60 @@ body {
 
 	background-color: #333;
 
+	.item {
+		font-family: 'Fredoka', sans-serif;
+		font-size: 1.5em;
+
+		cursor: pointer;
+
+		text-align: center;
+		background-color: #555;
+		padding: 3px;
+		border: none;
+		
+		width: 100%;
+
+		color: #fff;
+
+		&:hover {
+			background-color: #444;
+		}
+	}
+
 	#title {
 		font-family: 'Fredoka', sans-serif;
-		font-size: 2em;
+		font-size: 3em;
 		text-align: center;
 		margin-top: 10px;
 		color: #fff;
 		padding: 10px;
 	}
+	#splash {
+		animation: mover 1s linear	 infinite;
+		font-family: 'Fredoka', sans-serif;
+		font-size: 1em;
+		text-align: center;
+		margin-top: 10px;
+		color: #fc0;
+		padding: 10px;
+	}
+}
+
+
+#game_version {
+	position: fixed;
+
+	font-family: 'Fredoka', sans-serif;
+	font-size: 2em;
+	text-align: center;
+	margin-top: 10px;
+	color: #fff;
+	padding: 10px;
+
+	margin-bottom: 5px;
+	margin-right: 5px;
+	right: 0;
+	bottom: 0;
 }
 
 .cmenu {
@@ -91,5 +146,25 @@ body {
 	&.visible {
 		transform: scale(1);
 		transition: transform 200ms ease-out;
+	}
+}
+
+.controls {
+	.item {
+		font-family: 'Fredoka', sans-serif;
+		font-size: 1.5em;
+
+		cursor: pointer;
+
+		text-align: center;
+		background-color: #555;
+		padding: 3px;
+		border: none;
+
+		color: #fff;
+
+		&:hover {
+			background-color: #333;
+		}
 	}
 }

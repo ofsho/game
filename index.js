@@ -1,5 +1,7 @@
 // uyhhhhh
 const { app, BrowserWindow } = require('electron')
+const path = require('path')
+
 const createWindow = () => {
 	const win = new BrowserWindow({
 		width: 1800,
@@ -8,6 +10,7 @@ const createWindow = () => {
 	})
 
 	win.loadFile('./public/index.html')
+	win.setResizable(false)
 }
 
 app.whenReady().then(() => {

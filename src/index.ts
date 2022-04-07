@@ -3,6 +3,7 @@
 
 import Cell from "./cells";
 import { render } from "./rendering";
+import { version } from '../package.json';
 import { DefaultScript, CellDirection } from "./types";
 import { minifyJSON } from "./utils";
 
@@ -43,3 +44,42 @@ export function cellLookup(x: number, y: number) {
 }
 
 if (container != null) render(board, container, select)
+if (document.getElementById("game_version") != null) document.getElementById("game_version").innerHTML = `v${version}`
+
+const menuItems = [
+	document.getElementById("play"),
+	document.getElementById("edit"),
+	document.getElementById("settings"),
+	document.getElementById("exit"),
+	document.getElementById("return")
+]
+
+if (menuItems[0]){
+	menuItems[0].addEventListener("click", function() {
+		window.location.href = window.location.href + "/../game.html"
+	}, false)
+}
+
+if (menuItems[1]){
+	menuItems[1].addEventListener("click", function() {
+		console.log("fail")
+	}, false)
+}
+
+if (menuItems[2]){
+	menuItems[2].addEventListener("click", function() {
+		console.log("fail")
+	}, false)
+}
+
+if (menuItems[3]){
+	menuItems[3].addEventListener("click", function() {
+		window.close()
+	}, false)
+}
+
+if (menuItems[4]){
+	menuItems[4].addEventListener("click", function() {
+		window.location.href = window.location.href + "/../index.html"
+	}, false)
+}
