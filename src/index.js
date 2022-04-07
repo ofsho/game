@@ -1,12 +1,15 @@
 // global variables
 const container = document.getElementById("container");
+const scope = document.querySelector("body")
+
 const Cell = require("./cells.js");
 const cells = [
-	new Cell("st", "mover", "./../img/cells/mover.png", "pass"),
-	new Cell("st", "enemy", "./../img/cells/enemy.png", "pass"),
-	new Cell("st", "generator", "./../img/cells/generator.png", "pass"),
-	new Cell("st", "rotator", "./../img/cells/rotator.png", "pass")
+	new Cell("st", "mover", "./../img/cells/mover.png", "Mover", "pass"),
+	new Cell("st", "enemy", "./../img/cells/enemy.png", "Enemy", "pass"),
+	new Cell("st", "generator", "./../img/cells/generator.png", "Generator", "pass"),
+	new Cell("st", "rotator", "./../img/cells/rotator.png", "Rotator", "pass")
 ]
+const cmenu = document.getElementById("cmenu");
 let select = cells[0];
 
 // functions
@@ -96,10 +99,53 @@ function render() {
 			}, false);
 
 			element.addEventListener('contextmenu', function(ev) {
+				// make it appear
 				ev.preventDefault();
-				alert('success!');
+
+				const { clientX: mouseX, clientY: mouseY } = ev;
+
+				cmenu.style.top = `${mouseY}px`
+				cmenu.style.left = `${mouseX}px`
+
+				cmenu.classList.add("visible")
+
+				const tokens = tokenizeElement(cellLookup(y,x))
+
+				// buttons
+				cmenu.getElementsByClassName("title")[0].textContent = tokens[1].value;
+				if (tokens[1].value == "blank") {
+					cmenu.getElementsByClassName("title")[0].textContent = "Nothing here... :(";
+					cmenu.getElementsByClassName("delete")[0].style.display = "none";
+					cmenu.getElementsByClassName("modify")[0].style.display = "none";
+				} else {
+					cmenu.getElementsByClassName("delete")[0].style.display = "block";
+					cmenu.getElementsByClassName("modify")[0].style.display = "block";
+				}
+
+				cmenu.getElementsByClassName("delete")[0].addEventListener('click', () => {
+					// set the element value to blank save code
+					board[y][x] = "st|blank|./../img/cells/default.png";
+					cmenu.classList.remove("visible");
+					render(); // dont forget to re-render :lol:
+				}, false);
+
+				cmenu.getElementsByClassName("modify")[0].addEventListener('click', () => {
+					// will fix soon
+					cmenu.classList.remove("visible");
+				}, false)
+
+				cmenu.getElementsByClassName("close")[0].addEventListener('click', () => {
+					cmenu.classList.remove("visible");
+				}, false)
+				
 				return false;
 			}, false);
+
+			scope.addEventListener("click", (ev) => {
+				if (ev.target.offsetParent != cmenu) {
+					cmenu.classList.remove("visible");
+				}
+			}, false)
 		})
 	})
 }
@@ -107,14 +153,5 @@ function render() {
 function cellLookup(x,y) {
 	return board[x][y]
 }
-
-// testing fallback
-board[0][0] = "st|mover|./../img/cells/mover.png";
-board[0][1] = "st|gener|./../img/cells/generator.png";
-board[0][2] = "st|rotat|./../img/cells/rotator.png";
-
-board[1][2] = "st|enemy|./../img/cells/enemy.png";
-
-console.log(cellLookup(1,2))
 
 render()

@@ -5,16 +5,21 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="./dist/bundle.js" defer></script>
+
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 	<title>Schematell</title>
 </head>
 <body>
+	<!-- Table with all the funny stuff -->
 	<table id="container" class="container"></table>
-	<div class="cmenu" style="display: none;">
-		<ul class="item">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore quis, repudiandae, nisi voluptates maxime sint ipsa facere unde fugit, id et commodi cumque. Enim quas nesciunt error cumque saepe accusantium?</ul>
-		<ul class="item">Alias nulla autem atque nam, numquam quibusdam libero reiciendis quo provident, suscipit odio! Deserunt, optio! Commodi omnis, totam aspernatur earum laboriosam, qui nam hic quas nulla placeat necessitatibus deleniti tempora.</ul>
-		<ul class="item">Deserunt asperiores sunt in facilis nostrum blanditiis hic harum! Nihil animi nemo facere magni ad laboriosam. Id corporis velit itaque magni praesentium, porro iure ad ipsa recusandae enim. Iste, autem.</ul>
-		<ul class="item">Maiores labore eius assumenda hic fugit itaque dignissimos enim. Veritatis dolore quidem corporis dolorem laudantium? Sunt exercitationem rem quo fugit distinctio aspernatur ipsa in error, qui dolore quidem, iusto iure?</ul>
-		<ul class="item">Iure, accusantium. Cumque maxime nesciunt numquam delectus aspernatur tenetur quisquam, assumenda laudantium, non eos veniam ea? At praesentium, sapiente fuga, explicabo commodi dolore iure dolorum obcaecati quia illo voluptatum a?</ul>
+
+	<!-- Context Menu -->
+	<div class="cmenu" id="cmenu">
+		<p class="title"><em>Cell Name</em></p>
+		<ul class="item delete"><span class="material-icons">delete</span>Delete</ul>
+		<ul class="item modify"><span class="material-icons">description</span>Modify</ul>
+		<ul class="item close"><span class="material-icons">close</span>Close</ul>
 	</div>
 </body>
 </html>
