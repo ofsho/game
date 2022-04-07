@@ -13,7 +13,7 @@ export function etf2html(etf: string) {
 			modified = `<strong>${modified}</strong>`
 			compiled.push(modified)
 			continue
-		} else if (element.startsWith("%NL%")) {
+		} else if (element.startsWith("\n")) {
 			modified = `<br>`
 			compiled.push(modified)
 			continue

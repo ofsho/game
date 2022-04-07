@@ -84,3 +84,14 @@ if (menuItems[4]){
 		window.location.href = window.location.href + "/../index.html"
 	}, false)
 }
+
+if (document.getElementById("update_log")) {
+	const ulog = document.getElementById("update_log")
+	const changelogURI = "https://raw.githubusercontent.com/Schematell/game/master/changelog.etf"
+	fetch(changelogURI)
+		.then(data => data.text())
+		.then(data => {
+			// console.log(data)
+			ulog.innerHTML = etf2html(data)
+		})
+}
