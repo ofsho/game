@@ -21,7 +21,7 @@ let select: Cell = cells[0];
 
 // bad function
 function createGrid(x: number,y: number, value: string) {
-	// create a basic 2d grid
+	// create a basic 2d grid!!
 	const grid = [];
 
 	// loop through y
