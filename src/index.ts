@@ -6,6 +6,7 @@ import { render } from "./rendering";
 import { version } from '../package.json';
 import { DefaultScript, CellDirection } from "./types";
 import { minifyJSON } from "./utils";
+import { etf2html } from "./etf";
 
 // variables
 const container: HTMLElement  = document.getElementById("container");
