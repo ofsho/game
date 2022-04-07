@@ -1,5 +1,13 @@
 // global variables
 const container = document.getElementById("container");
+const Cell = require("./cells.js");
+const cells = [
+	new Cell("st", "mover", "./../img/cells/mover.png", "pass"),
+	new Cell("st", "enemy", "./../img/cells/enemy.png", "pass"),
+	new Cell("st", "generator", "./../img/cells/generator.png", "pass"),
+	new Cell("st", "rotator", "./../img/cells/rotator.png", "pass")
+]
+let select = cells[0];
 
 // functions
 function createGrid(x,y,value) {
@@ -45,7 +53,6 @@ function tokenizeElement(ele) {
 }
 
 const board = createGrid(16,16,"st|blank|./../img/cells/default.png");
-console.log(board)
 
 function render() {
 	// instantiate a basic HTML array
@@ -58,10 +65,8 @@ function render() {
 		row.forEach((item, x) => {
 			html[i].push(`<td id="cell-${y}-${x}"></td>`);
 		})
-		console.log(html[ele]);
 		i += 1
 	})
-	console.log(html[0])
 	let htm = [];
 
 	html.forEach(function (value, index, array) {
@@ -78,19 +83,38 @@ function render() {
 
 			// fun code V
 			const tokenize = tokenizeElement(item); // tokenize the element value in board
-			const element = document.getElementById(`cell-${x}-${y}`) // get corresponding element in the DOM
+			const element = document.getElementById(`cell-${y}-${x}`) // get corresponding element in the DOM
 			element.innerHTML = `<img src="${tokenize[2].value}" onerror="this.src='./../img/ohshit.png'" class="cell">` // set the element's innerHTML to the image
+			
+			// element functionality
+			element.addEventListener('click', function(ev) {
+				// set the element value to select save code
+				board[y][x] = select.export();
+
+				// rerender the board
+				render();
+			}, false);
+
+			element.addEventListener('contextmenu', function(ev) {
+				ev.preventDefault();
+				alert('success!');
+				return false;
+			}, false);
 		})
 	})
 }
 
 function cellLookup(x,y) {
-	return board[y][x]
+	return board[x][y]
 }
 
 // testing fallback
-cellLookup(0,0) = "st|blank|./../img/cells/mover.png";
-cellLookup(0,1) = "st|blank|./../img/cells/generator.png";
-cellLookup(0,2) = "st|blank|./../img/cells/rotator.png";
-cellLookup(1,2) = "st|blank|./../img/cells/enemy.png";
+board[0][0] = "st|mover|./../img/cells/mover.png";
+board[0][1] = "st|gener|./../img/cells/generator.png";
+board[0][2] = "st|rotat|./../img/cells/rotator.png";
+
+board[1][2] = "st|enemy|./../img/cells/enemy.png";
+
+console.log(cellLookup(1,2))
+
 render()
