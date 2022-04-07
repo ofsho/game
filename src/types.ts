@@ -5,21 +5,34 @@ export type URL = {
 	url: string
 }
 
-export enum direction {
-	
+export enum CellDirection {
+	up,
+	left,
+	down,
+	right
 }
 
-export type schemeScript = {
+export enum SSDirection {
+	up,
+	left,
+	down,
+	right,
+	any
+}
+
+export type SchemeScript =
+{
 	name: string,
 	save_code: string,
 	update: string,
-	display: {
-	image_url: URL
-	},
 	collision: {
 		can_collide: boolean,
 		parameters: {
-			any?: string
+			any?: string,
+			up?: string,
+			down?: string,
+			left?: string,
+			right?: string
 		}
 	}
 }

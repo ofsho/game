@@ -1,19 +1,13 @@
-import { URL } from "./types"
+import { SchemeScript, URL } from "./types"
 
 export default class Cell {
 	constructor (
-		ns: string,
-		name: string,
-		image: URL,
-		display_name: string,
-		callback
-	) {
-		this.namespace = ns
-		this.name = name
-		this.image = image
-		this.display_name = display_name
-		this.callback = callback
-	}
+		public namespace: string,
+		public name: string,
+		public image: URL,
+		public display_name: string,
+		public callback: SchemeScript
+	) {}
 
 	export () {
 		// Exported in the SchemeToken format
