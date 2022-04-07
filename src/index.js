@@ -28,6 +28,9 @@ function tokenizeElement(ele) {
 				token.push({type: "name", value: element});
 				break;
 			case 2:
+				token.push({type: "display_name", value: element});
+				break;
+			case 3:
 				token.push({type: "image", value: element});
 				break;
 			default:
@@ -38,7 +41,7 @@ function tokenizeElement(ele) {
 	return token
 }
 
-const board = createGrid(16,16,"st|blank|./../img/cells/default.png");
+const board = createGrid(16,16,"st|blank|Empty|./../img/cells/default.png");
 
 function createGrid(x,y,value) {
 	// create a basic 2d grid
@@ -47,7 +50,7 @@ function createGrid(x,y,value) {
 	// loop through y
 	for (let i = 0; i < y; i++) {
 		const grie = []; // make an array for each row
-		for (let i = 0; i < x; i++) {
+		for (let j = 0; j < x; j++) {
 			grie.push(value); // append the value to grie
 		}
 		grid.push(grie); // push grie to grid
@@ -87,13 +90,18 @@ function render() {
 			// fun code V
 			const tokenize = tokenizeElement(item); // tokenize the element value in board
 			const element = document.getElementById(`cell-${y}-${x}`) // get corresponding element in the DOM
-			element.innerHTML = `<img src="${tokenize[2].value}" onerror="this.src='./../img/ohshit.png'" class="cell">` // set the element's innerHTML to the image
+			element.innerHTML = `<img src="${tokenize[3].value}" onerror="this.src='./../img/ohshit.png'" class="cell">` // set the element's innerHTML to the image
 
 			// element functionality
 			element.addEventListener('mousedown', function(ev) {
 				ev.preventDefault();
 				// set the element value to select save code
-				board[y][x] = select.export();
+				if (ev.button === 0) {
+					board[y][x] = select.export();
+				}
+				else if (ev.button === 2) {
+					board[y][x] = "st|blank|Blank|./../img/cells/default.png";
+				}
 
 				// rerender the board
 				render();
@@ -101,9 +109,6 @@ function render() {
 
 			element.addEventListener('contextmenu', function(ev) {
 				ev.preventDefault();
-
-				board[y][x] = "st|blank|./../img/cells/default.png";
-				render(); // dont forget to re-render :lol: but this causes lag so use barebone
 
 				// stupid ass code
 				// make it appear
@@ -161,4 +166,36 @@ function cellLookup(x,y) {
 	return board[x][y]
 }
 
-render()
+function tick() {
+	// loop through y
+	for (let i = 0; i < board.length; i++) {
+		for (let j = 0; j < board[i].length; j++) {
+			// cell handling
+			let cell = board[i][j]
+			let tokens = tokenizeElement(cell)
+
+			if (tokens[1] == "mover") {
+				console.log("is a mover")
+			}
+		}
+		// repeat until grid is finished
+	}
+
+	console.log("tick")
+}
+
+let running = false
+
+function start() {
+	running = !running
+	while (running) {
+		tick();
+		render();
+		setTimeout(() => {}, 1000/60)
+	}
+}
+
+document.getElementById("start").onclick = start
+document.getElementById("stop").onclick = () => { running = false }
+
+render();

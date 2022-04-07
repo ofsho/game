@@ -9,6 +9,6 @@ module.exports = class Cell {
 
 	export () {
 		// Exported in the SchemeToken format
-		return `${this.namespace}|${this.display_name}|${this.image}`
+		return `${this.namespace}|${this.name}|${this.display_name}|${this.image}`
 	}
 }
