@@ -5,7 +5,7 @@ export default class Cell {
 		ns: string,
 		name: string,
 		image: URL,
-		display_name,
+		display_name: string,
 		callback
 	) {
 		this.namespace = ns
