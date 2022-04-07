@@ -79,11 +79,11 @@ function render() {
 			// fun code V
 			const tokenize = tokenizeElement(item); // tokenize the element value in board
 			const element = document.getElementById(`cell-${x}-${y}`) // get corresponding element in the DOM
-			element.innerHTML = `<img src="${tokenize[2].value}" onerror="this.src='./../img/ohshit.png'" width=35px height=35px">` // set the element's innerHTML to the image
+			element.innerHTML = `<img src="${tokenize[2].value}" onerror="this.src='./../img/ohshit.png'" class="cell">` // set the element's innerHTML to the image
 		})
 	})
 }
 
 // testing fallback
-board[0][0] = "st|blank|lolepicfail.png";
+board[0][0] = "st|blank|https://media.discordapp.net/attachments/820301084596895814/961467266342477865/unknown.png?width=383&height=567";
 render()

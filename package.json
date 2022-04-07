@@ -14,7 +14,11 @@
     "game",
     "json"
   ],
-  "author": "Just-a-Unity-Dev",
+  "repository": {
+	"type": "git",
+	"url": "git+https://github.com/Schematell/game.git"
+  },
+  "author": "Schematell",
   "license": "MIT",
   "devDependencies": {
     "css-loader": "^6.7.1",
