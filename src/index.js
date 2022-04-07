@@ -58,9 +58,9 @@ function createGrid(x,y,value) {
 	return grid;
 }
 
-function barebone_render() {
+function render() {
+	console.log("Main render initiated")
 	// instantiate a basic HTML array
-	console.log("Barebone render initiated")
 	const html = [];
 	const ele = 0;
 	let i = 0;
@@ -78,79 +78,74 @@ function barebone_render() {
 		// :vomit: hacky work around
 		let ht = value.join("") // join the value of all columns in a row
 		htm.push(`<tr>${ht}</tr>`) // push a row to HTM array
-		container.innerHTML = htm.join(""); // then set the container's innerHTML to the HTM array
 	})
+
+	container.innerHTML = htm.join(""); // then set the container's innerHTML to the HTM array
 
 	board.forEach(function (row, y) {
 		row.forEach((item, x) => {
-			// boring code V
-			// document.getElementById(`cell-${x}-${y}`).innerHTML = item
-
 			// fun code V
 			const tokenize = tokenizeElement(item); // tokenize the element value in board
 			const element = document.getElementById(`cell-${y}-${x}`) // get corresponding element in the DOM
-			console.log(element)
 			element.innerHTML = `<img src="${tokenize[2].value}" onerror="this.src='./../img/ohshit.png'" class="cell">` // set the element's innerHTML to the image
-		})
-	})
-}
 
-function render() {
-	console.log("Main render initiated")
-	barebone_render()
-
-	board.forEach(function (row, y) {
-		row.forEach((item, x) => {
 			// element functionality
-			element.addEventListener('click', function(ev) {
+			element.addEventListener('mousedown', function(ev) {
+				ev.preventDefault();
 				// set the element value to select save code
 				board[y][x] = select.export();
 
 				// rerender the board
-				barebone_render();
+				render();
 			}, false);
 
 			element.addEventListener('contextmenu', function(ev) {
-				// make it appear
 				ev.preventDefault();
 
-				const { clientX: mouseX, clientY: mouseY } = ev;
+				board[y][x] = "st|blank|./../img/cells/default.png";
+				render(); // dont forget to re-render :lol: but this causes lag so use barebone
 
-				cmenu.style.top = `${mouseY}px`
-				cmenu.style.left = `${mouseX}px`
+				// stupid ass code
+				// make it appear
+				// ev.preventDefault();
 
-				cmenu.classList.add("visible")
+				// const { clientX: mouseX, clientY: mouseY } = ev;
 
-				const tokens = tokenizeElement(cellLookup(y,x))
+				// cmenu.style.top = `${mouseY}px`
+				// cmenu.style.left = `${mouseX}px`
 
-				// buttons
-				cmenu.getElementsByClassName("title")[0].textContent = tokens[1].value;
-				if (tokens[1].value == "blank") {
-					cmenu.getElementsByClassName("title")[0].textContent = "Nothing here... :(";
-					cmenu.getElementsByClassName("delete")[0].style.display = "none";
-					cmenu.getElementsByClassName("modify")[0].style.display = "none";
-				} else {
-					cmenu.getElementsByClassName("delete")[0].style.display = "block";
-					cmenu.getElementsByClassName("modify")[0].style.display = "block";
-				}
+				// cmenu.classList.add("visible")
 
-				cmenu.getElementsByClassName("delete")[0].addEventListener('click', () => {
-					// set the element value to blank save code
-					board[y][x] = "st|blank|./../img/cells/default.png";
-					cmenu.classList.remove("visible");
-					barebone_render(); // dont forget to re-render :lol: but this causes lag so use barebone
-				}, false);
+				// const tokens = tokenizeElement(cellLookup(y,x))
 
-				cmenu.getElementsByClassName("modify")[0].addEventListener('click', () => {
-					// will fix soon
-					cmenu.classList.remove("visible");
-				}, false)
+				// // buttons
+				// cmenu.getElementsByClassName("title")[0].textContent = tokens[1].value;
+				// if (tokens[1].value == "blank") {
+				// 	cmenu.getElementsByClassName("title")[0].textContent = "Nothing here... :(";
+				// 	cmenu.getElementsByClassName("delete")[0].style.display = "none";
+				// 	cmenu.getElementsByClassName("modify")[0].style.display = "none";
+				// } else {
+				// 	cmenu.getElementsByClassName("delete")[0].style.display = "block";
+				// 	cmenu.getElementsByClassName("modify")[0].style.display = "block";
+				// }
 
-				cmenu.getElementsByClassName("close")[0].addEventListener('click', () => {
-					cmenu.classList.remove("visible");
-				}, false)
+				// cmenu.getElementsByClassName("delete")[0].addEventListener('click', () => {
+				// 	// set the element value to blank save code
+				// 	board[y][x] = "st|blank|./../img/cells/default.png";
+				// 	cmenu.classList.remove("visible");
+				// 	render(); // dont forget to re-render :lol: but this causes lag so use barebone
+				// }, false);
+
+				// cmenu.getElementsByClassName("modify")[0].addEventListener('click', () => {
+				// 	// will fix soon
+				// 	cmenu.classList.remove("visible");
+				// }, false)
+
+				// cmenu.getElementsByClassName("close")[0].addEventListener('click', () => {
+				// 	cmenu.classList.remove("visible");
+				// }, false)
 				
-				return false;
+				// return false;
 			}, false);
 
 			scope.addEventListener("click", (ev) => {
