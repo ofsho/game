@@ -44,7 +44,7 @@ function tokenizeElement(ele) {
 	return token
 }
 
-const board = createGrid(16,16,"st|blank|./../img/ohdamn.png");
+const board = createGrid(16,16,"st|blank|./../img/cells/default.png");
 console.log(board)
 
 function render() {
@@ -84,6 +84,13 @@ function render() {
 	})
 }
 
+function cellLookup(x,y) {
+	return board[y][x]
+}
+
 // testing fallback
-board[0][0] = "st|blank|https://media.discordapp.net/attachments/820301084596895814/961467266342477865/unknown.png?width=383&height=567";
+cellLookup(0,0) = "st|blank|./../img/cells/mover.png";
+cellLookup(0,1) = "st|blank|./../img/cells/generator.png";
+cellLookup(0,2) = "st|blank|./../img/cells/rotator.png";
+cellLookup(1,2) = "st|blank|./../img/cells/enemy.png";
 render()
