@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-	entry: './src/entry.js',
+	entry: './src/entry.ts',
 	mode: "development",
 	output: {
 		path: path.join(__dirname + "/public/dist"),
@@ -19,5 +19,8 @@ module.exports = {
 				use: ["style-loader", "css-loader", "sass-loader"],
 			}
 		]
+	},
+	resolve: {
+		extensions: [".ts", ".js"]
 	}
 };
