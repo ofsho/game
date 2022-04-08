@@ -4,10 +4,10 @@
 export type ImageURI = string
 
 export enum CellDirection {
-	up,
-	left,
-	down,
-	right
+	up, // 0
+	left, // 1
+	down, // 2
+	right // 3
 }
 
 export enum SSDirection {
@@ -35,10 +35,33 @@ export type SchemeScript =
 	}
 }
 
+
+export type ScriptParameters =
+{
+	element: any,
+	transform: {
+		position: {
+			x: number,
+			y: number
+		},
+		rotation: CellDirection
+	}
+}
+
 export const DefaultScript: SchemeScript = {
 	name: "Default",
 	save_code: "st|default",
 	update: "pass",
+	collision: {
+		can_collide: true,
+		parameters: {}
+	}
+}
+
+export const MoverScript: SchemeScript = {
+	name: "Mover",
+	save_code: "st|mover",
+	update: "move-forward",
 	collision: {
 		can_collide: true,
 		parameters: {}
