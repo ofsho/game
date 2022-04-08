@@ -7,6 +7,7 @@ import { version } from '../package.json';
 import { DefaultScript, CellDirection } from "./types";
 import { minifyJSON } from "./utils";
 import { etf2html } from "./etf";
+import { splashText } from "./splash";
 
 // variables
 const container: HTMLElement  = document.getElementById("container");
@@ -83,6 +84,11 @@ if (menuItems[4]){
 	menuItems[4].addEventListener("click", function() {
 		window.location.href = window.location.href + "/../index.html"
 	}, false)
+}
+
+if (document.getElementById("splash")) {
+	const splash = document.getElementById("splash")
+	splash.textContent = splashText[Math.floor(Math.random() * splashText.length)]
 }
 
 if (document.getElementById("update_log")) {
