@@ -9,14 +9,14 @@ import { minifyJSON } from "./utils";
 
 // variables
 const container: HTMLElement  = document.getElementById("container");
-const emptyCell = `st|||blank|||./../img/cells/default.png|||Empty|||${minifyJSON(JSON.stringify(DefaultScript))}`
+const emptyCell = `st|||blank|||./../assets/img/cells/default.png|||Empty|||${minifyJSON(JSON.stringify(DefaultScript))}`
 
 const board = createGrid(16,16, emptyCell)
 const cells: Cell[] = [
-	new Cell("st", "mover", "./../img/cells/mover.png", "Mover", CellDirection.right, DefaultScript),
-	new Cell("st", "enemy", "./../img/cells/enemy.png", "Enemy", CellDirection.right, DefaultScript),
-	new Cell("st", "generator", "./../img/cells/generator.png", "Generator", CellDirection.right, DefaultScript),
-	new Cell("st", "rotator", "./../img/cells/rotator.png", "Rotator", CellDirection.right, DefaultScript),
+	new Cell("st", "mover", "./../assets/img/cells/mover.png", "Mover", CellDirection.right, DefaultScript),
+	new Cell("st", "enemy", "./../assets/img/cells/enemy.png", "Enemy", CellDirection.right, DefaultScript),
+	new Cell("st", "generator", "./../assets/img/cells/generator.png", "Generator", CellDirection.right, DefaultScript),
+	new Cell("st", "rotator", "./../assets/img/cells/rotator.png", "Rotator", CellDirection.right, DefaultScript),
 ]
 let select: Cell = cells[0];
 

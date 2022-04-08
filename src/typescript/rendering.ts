@@ -2,9 +2,9 @@ import { cellLookup } from ".";
 import Cell from "./typescript/cells";
 import { DefaultScript } from "./types";
 import { minifyJSON } from "./utils";
-export const emptyCell = `st|||blank|||./../img/cells/default.png|||Empty|||${minifyJSON(JSON.stringify(DefaultScript))}`
+export const emptyCell = `st|||blank|||./../assets/img/cells/default.png|||Empty|||${minifyJSON(JSON.stringify(DefaultScript))}`
 const cmenu: HTMLElement = document.getElementById("cmenu");
-const fallback = "./../img/ohshit.png"
+const fallback = "./../assets/img/ohshit.png"
 
 export function tokenizeElement(ele: string) {
 	// ok basic thing that converts ${element} into a object i can read
