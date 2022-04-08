@@ -1,5 +1,5 @@
 import { cellLookup } from ".";
-import Cell from "./typescript/cells";
+import Cell from "./cells";
 import { DefaultScript } from "./types";
 import { minifyJSON } from "./utils";
 export const emptyCell = `st|||blank|||./../assets/img/cells/default.png|||Empty|||${minifyJSON(JSON.stringify(DefaultScript))}`

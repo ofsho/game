@@ -1,4 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300&display=swap');
+@font-face {
+	font-family: "Fredoka-Light";
+	src: url('./../../assets/fonts/Fredoka-Light.ttf');
+}
+@font-face {
+	font-family: "Fredoka-Regular";
+	src: url('./../../assets/fonts/Fredoka-Regular.ttf');
+}
+@font-face {
+	font-family: "SCP-Light";
+	src: url('./../../assets/fonts/SourceCodePro-Light.ttf');
+}
+@font-face {
+	font-family: "SCP-Regular";
+	src: url('./../../assets/fonts/SourceCodePro-Regular.ttf');
+}
 
 $image_size: 45px;
 body {
@@ -52,7 +67,7 @@ body {
 	background-color: #333;
 
 	.item {
-		font-family: 'Fredoka', sans-serif;
+		font-family: 'Fredoka-Light', sans-serif;
 		font-size: 1.5em;
 
 		cursor: pointer;
@@ -72,7 +87,7 @@ body {
 	}
 
 	#title {
-		font-family: 'Fredoka', sans-serif;
+		font-family: 'Fredoka-Light', sans-serif;
 		font-size: 3em;
 		text-align: center;
 		margin-top: 10px;
@@ -81,7 +96,7 @@ body {
 	}
 	#splash {
 		animation: mover 1s linear	 infinite;
-		font-family: 'Fredoka', sans-serif;
+		font-family: 'Fredoka-Light', sans-serif;
 		font-size: 1em;
 		text-align: center;
 		margin-top: 10px;
@@ -94,7 +109,7 @@ body {
 #game_version {
 	position: fixed;
 
-	font-family: 'Fredoka', sans-serif;
+	font-family: 'Fredoka-Light', sans-serif;
 	font-size: 2em;
 	text-align: center;
 	margin-top: 10px;
@@ -110,7 +125,7 @@ body {
 #latest_version {
 	position: fixed;
 
-	font-family: 'Fredoka', sans-serif;
+	font-family: 'Fredoka-Light', sans-serif;
 	font-size: 1.5em;
 	text-align: center;
 	margin-top: 10px;
@@ -130,7 +145,7 @@ body {
 	background-color: #666; // screaming emoji!!! 666!! devil numberr!!!
 	border-radius: 5px;
 	text-align: center;
-	font-family: 'Fredoka', sans-serif;
+	font-family: 'Fredoka-Light', sans-serif;
 	color: #fff;
 
 	transform: scale(0);
@@ -167,7 +182,7 @@ body {
 
 .controls {
 	.item {
-		font-family: 'Fredoka', sans-serif;
+		font-family: 'Fredoka-Light', sans-serif;
 		font-size: 1.5em;
 
 		cursor: pointer;
@@ -187,7 +202,7 @@ body {
 
 .etf {
 	background-color: #555;
-	font-family: 'Fredoka', sans-serif;
+	font-family: 'Fredoka-Light', sans-serif;
 	color: white;
 
 	overflow-y: scroll;
