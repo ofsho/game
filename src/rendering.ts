@@ -2,7 +2,7 @@ import { cellLookup } from ".";
 import Cell from "./cells";
 import { DefaultScript } from "./types";
 import { minifyJSON } from "./utils";
-const emptyCell = `st|||blank|||./../img/cells/default.png|||Empty|||${minifyJSON(JSON.stringify(DefaultScript))}`
+export const emptyCell = `st|||blank|||./../img/cells/default.png|||Empty|||${minifyJSON(JSON.stringify(DefaultScript))}`
 const cmenu: HTMLElement = document.getElementById("cmenu");
 const fallback = "./../img/ohshit.png"
 

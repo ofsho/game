@@ -2,6 +2,7 @@
 import { version } from '../package.json';
 import { etf2html } from "./etf";
 import { splashText } from "./splash";
+import { join } from "path";
 
 if (document.getElementById("game_version") != null) document.getElementById("game_version").innerHTML = `v${version}`
 
@@ -21,7 +22,6 @@ if (document.getElementById("latest_version") != null) {
 			if (parseInt(versions.latest.split(".").join("")) > parseInt(versions.current.split(".").join(""))) {
 				document.getElementById("latest_version").style.color = "#ff0000"
 			}
-			console.log(data)
 		})
 }
 
@@ -74,7 +74,10 @@ if (document.getElementById("update_log")) {
 	fetch(changelogURI)
 		.then(data => data.text())
 		.then(data => {
-			// console.log(data)
 			ulog.innerHTML = etf2html(data)
 		})
 }
+
+// const audio = new Audio('./../music/cell_destroy.wav');
+// audio.loop = true;
+// audio.play();

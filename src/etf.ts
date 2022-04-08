@@ -1,7 +1,6 @@
 export function etf2html(etf: string) {
 	// convert etf to html
 	const lines = etf.split("\n")
-	console.log(lines)
 	const compiled = []
 
 	for (let i = 0; i < lines.length; i++) {
@@ -32,6 +31,5 @@ export function etf2html(etf: string) {
 		}
 	}
 
-	console.log(compiled)
 	return compiled.join("\n")
 }

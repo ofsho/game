@@ -3,6 +3,7 @@ const path = require('path');
 module.exports = {
 	entry: './src/entry.ts',
 	mode: "development",
+	target: 'electron-renderer',
 	output: {
 		path: path.join(__dirname + "/public/dist"),
 		filename: 'bundle.js'

@@ -6,13 +6,14 @@
   "scripts": {
     "test": "echo \"wala po :(\"",
     "publish": "npm run build",
-
-	"build": "npm run build:webpack",
+    "build": "npm run build:webpack && npm run build:electron",
     "watch": "npm-run-all --parallel watch:webpack watch:server",
-
     "build:webpack": "webpack --config webpack.config.js",
-
-	"watch:webpack": "webpack --config webpack.config.js --watch",
+    "build:electron": "npm run build:win && npm run build:linux && npm run build:darwin",
+    "build:win": "electron-packager . schematell --overwrite --asar --platform=win32 --arch=ia32 --prune=true --out=release/win --version-string.CompanyName=Schematell --version-string.FileDescription=CE --version-string.ProductName=\"Schematell\"",
+    "build:linux": "electron-packager . schematell --overwrite --asar --platform=linux --arch=x64 --icon=./public/favicon.png --prune=true --out=release/linux",
+    "build:darwin": "electron-packager . --overwrite --platform=darwin --arch=x64 --prune=true --out=release/darwin",
+    "watch:webpack": "webpack --config webpack.config.js --watch",
     "watch:server": "nodemon \"./dist/bundle.js\" --exec \"electron .\" --watch"
   },
   "keywords": [
@@ -30,6 +31,7 @@
   "devDependencies": {
     "css-loader": "^6.7.1",
     "electron": "^18.0.3",
+    "electron-packager": "^15.4.0",
     "nodemon": "^2.0.15",
     "npm-run-all": "^4.1.5",
     "sass": "^1.49.11",
@@ -40,6 +42,7 @@
     "webpack-cli": "^4.9.2"
   },
   "dependencies": {
+    "bson": "^4.6.2",
     "style-loader": "^3.3.1"
   }
 }

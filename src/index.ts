@@ -2,7 +2,7 @@
 // imports
 
 import Cell from "./cells";
-import { render } from "./rendering";
+import { render, tokenizeElement } from "./rendering";
 import { DefaultScript, CellDirection } from "./types";
 import { minifyJSON } from "./utils";
 
@@ -42,5 +42,18 @@ function createGrid(x: number,y: number, value: string) {
 export function cellLookup(x: number, y: number) {
 	return board[y][x]
 }
+
+export function packString(string: string) {
+	const tokens = tokenizeElement(string);
+	const packed: any = {}
+
+	for (let i = 0; i < tokens.length; i++) {
+		packed[tokens[i].type] = tokens[i].value
+	}
+
+	return packed;
+}
+
+console.log(packString(emptyCell))
 
 if (container != null) render(board, container, select)
