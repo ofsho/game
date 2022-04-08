@@ -43,17 +43,4 @@ export function cellLookup(x: number, y: number) {
 	return board[y][x]
 }
 
-export function packString(string: string) {
-	const tokens = tokenizeElement(string);
-	const packed: any = {}
-
-	for (let i = 0; i < tokens.length; i++) {
-		packed[tokens[i].type] = tokens[i].value
-	}
-
-	return packed;
-}
-
-console.log(packString(emptyCell))
-
 if (container != null) render(board, container, select)
