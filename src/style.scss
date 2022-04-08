@@ -107,6 +107,22 @@ body {
 	bottom: 0;
 }
 
+#latest_version {
+	position: fixed;
+
+	font-family: 'Fredoka', sans-serif;
+	font-size: 1.5em;
+	text-align: center;
+	margin-top: 10px;
+	color: #fff;
+	padding: 10px;
+
+	margin-bottom: 2.125em;
+	margin-right: 5px;
+	right: 0;
+	bottom: 0;
+}
+
 .cmenu {
 	position: fixed;
 	z-index: 1000;
@@ -174,7 +190,7 @@ body {
 	font-family: 'Fredoka', sans-serif;
 	color: white;
 
-	overflow-y: auto;
+	overflow-y: scroll;
 
 	.purple {
 		color: purple;

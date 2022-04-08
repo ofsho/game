@@ -1,6 +1,6 @@
 {
   "name": "schematell",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Celluar Automata game thing",
   "main": "index.js",
   "scripts": {
