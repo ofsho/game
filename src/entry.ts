@@ -1,6 +1,6 @@
 // sascss
-import './style.scss';
+import './scss/style.scss';
 
 // typesci
-import './index.ts';
-import './webpage';
+import './typescript/index.ts';
+import './typescript/webpage';
