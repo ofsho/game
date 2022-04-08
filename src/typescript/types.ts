@@ -1,7 +1,5 @@
-// Fancy version of String
-
-
-export type ImageURI = string
+// Enums
+// Numbers but readable and conscise.. Probably
 
 export enum CellDirection {
 	up, // 0
@@ -18,6 +16,13 @@ export enum SSDirection {
 	any
 }
 
+// Aliased Types
+// Types that are really just aliases so that it's easier for me (and contributors) to read
+export type ImageURI = string
+export type Board = string[][]
+
+// Actual Types
+// The actual types
 export type SchemeScript =
 {
 	name: string,

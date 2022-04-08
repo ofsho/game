@@ -6,21 +6,21 @@ export function isOccupied(x: number,y: number,board: string[][]) {
 	return packString(board[y][x]).name != "blank"
 }
 
-export function moveCell(cellX: number, cellY: number, offX: number, offY: number, board: string[][]) {
+export function moveCell(cellX: number, cellY: number, offX: number, offY: number, board: string[][], cellName?: string) {
 	const newX = cellX + offX
 	const newY = cellY + offY
+
 	if (isOccupied(newX, newY, board)) {
 		console.log("New position occupied, looping!")
-		console.log(`Current X: ${cellX}, Current Y: ${cellY}`)
+		console.log(`Current X: ${cellX}, Current Y: ${cellY}, Cell: ${cellName}`)
 
 		moveCell(newX,newY,offX,offY, board)
-	} else {
-		console.log("New position not occupied, moving!")
-		console.log(`Current X: ${cellX}, Current Y: ${cellY}`)
-		
-		board[newY][newX] = board[cellY][cellX]
-		board[cellY][cellX] = emptyCell
 	}
+	console.log("New position not occupied, moving!")
+	console.log(`Current X: ${cellX}, Current Y: ${cellY}, Cell: ${cellName}`)
+
+	board[newY][newX] = board[cellY][cellX]
+	board[cellY][cellX] = emptyCell
 }
 
 export function handleScript(script: SchemeScript, paremeters: ScriptParameters, board: string[][]) {
@@ -37,7 +37,7 @@ export function handleScript(script: SchemeScript, paremeters: ScriptParameters,
 						break
 					
 					case 1:
-						moveCell(x, y, 1, 0, board)
+						moveCell(x, y, 1, 0, board, paremeters.element.name)
 						break
 					
 					case 2:

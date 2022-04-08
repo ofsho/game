@@ -20,6 +20,7 @@ const emptyCell = `st|||blank|||./../assets/img/cells/default.png|||Empty|||${mi
 
 let board = createGrid(16,16, emptyCell)
 let selectRotation: CellDirection = CellDirection.right;
+let selector = 0;
 const cells: Cell[] = [
 	new Cell("st", "mover", "./../assets/img/cells/mover.png", "Mover", selectRotation, MoverScript),
 	new Cell("st", "enemy", "./../assets/img/cells/enemy.png", "Enemy", selectRotation, DefaultScript),
@@ -27,7 +28,7 @@ const cells: Cell[] = [
 	new Cell("st", "rotator", "./../assets/img/cells/rotator.png", "Rotator", selectRotation, DefaultScript),
 	new Cell("st", "push", "./../assets/img/cells/push.png", "Push", selectRotation, DefaultScript),
 ]
-let select: Cell = cells[0];
+let select: Cell = cells[selector];
 
 // bad function
 function createGrid(x: number,y: number, value: string) {
@@ -67,13 +68,18 @@ if (container != null) {
 
 	scope.addEventListener("keydown", function(ev) {
 		if (ev.key == "z") {
-			select = cells[1]
+			selector++;
+			if (cells[selector] != null || undefined) {
+				select = cells[selector]
+			} else {
+				selector = 0
+				select = cells[selector]
+			}
 			console.log(select)
 			render(board, container, select)
 		}
 	}, false)
 
-	console.log(cellLookup(8, 3))
 	render(board, container, select)
 	tickElement.addEventListener("click", function(ev) {
 		if (running == false) {
