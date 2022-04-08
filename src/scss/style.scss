@@ -47,10 +47,10 @@ body {
 
 @keyframes mover {
 	0%, 100% {
-		transform: skewY(3deg);
+		transform: rotate(5deg);
 	}
 	50% {
-		transform: skewY(-3deg);
+		transform: rotate(-5deg);
 	}
 }
 
@@ -95,7 +95,7 @@ body {
 		padding: 10px;
 	}
 	#splash {
-		animation: mover 1s linear	 infinite;
+		animation: mover 1s ease-in-out infinite;
 		font-family: 'Fredoka-Light', sans-serif;
 		font-size: 1em;
 		text-align: center;

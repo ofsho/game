@@ -1,5 +1,6 @@
 import { cellLookup } from ".";
 import Cell from "./cells";
+import { packString } from "./packer";
 import { DefaultScript } from "./types";
 import { minifyJSON } from "./utils";
 export const emptyCell = `st|||blank|||./../assets/img/cells/default.png|||Empty|||${minifyJSON(JSON.stringify(DefaultScript))}`
@@ -69,8 +70,10 @@ export function render(board: any, container: any, select: Cell) {
 		row.forEach((item: any, x: number) => {
 			// fun code V
 			let tokenize = tokenizeElement(item);
+			let packed = packString(item);
+			
 			const element = document.getElementById(`cell-${y}-${x}`) // get corresponding element in the DOM
-			element.innerHTML = `<img src="${tokenize[2].value}" onerror="this.src='${fallback}'" class="cell">` // set the element's innerHTML to the image
+			element.innerHTML = `<img src="${tokenize[2].value}" style="transform: rotate(${90 * parseInt(packed.rotation)}deg);" onerror="this.src='${fallback}'" class="cell">` // set the element's innerHTML to the image
 
 			// element functionality
 			element.addEventListener('mousedown', function(ev) {

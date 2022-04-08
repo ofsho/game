@@ -13,16 +13,19 @@ let save: string[][] = null;
 // variables
 const container: HTMLElement  = document.getElementById("container");
 const controls = document.getElementById("controls");
+const scope = document.querySelector("body");
 const tickElement = document.getElementById("tick");
 const restartElement = document.getElementById("restart");
 const emptyCell = `st|||blank|||./../assets/img/cells/default.png|||Empty|||${minifyJSON(JSON.stringify(DefaultScript))}`
 
 let board = createGrid(16,16, emptyCell)
+let selectRotation: CellDirection = CellDirection.right;
 const cells: Cell[] = [
-	new Cell("st", "mover", "./../assets/img/cells/mover.png", "Mover", CellDirection.right, MoverScript),
-	new Cell("st", "enemy", "./../assets/img/cells/enemy.png", "Enemy", CellDirection.right, DefaultScript),
-	new Cell("st", "generator", "./../assets/img/cells/generator.png", "Generator", CellDirection.right, DefaultScript),
-	new Cell("st", "rotator", "./../assets/img/cells/rotator.png", "Rotator", CellDirection.right, DefaultScript),
+	new Cell("st", "mover", "./../assets/img/cells/mover.png", "Mover", selectRotation, MoverScript),
+	new Cell("st", "enemy", "./../assets/img/cells/enemy.png", "Enemy", selectRotation, DefaultScript),
+	new Cell("st", "generator", "./../assets/img/cells/generator.png", "Generator", selectRotation, DefaultScript),
+	new Cell("st", "rotator", "./../assets/img/cells/rotator.png", "Rotator", selectRotation, DefaultScript),
+	new Cell("st", "push", "./../assets/img/cells/push.png", "Push", selectRotation, DefaultScript),
 ]
 let select: Cell = cells[0];
 
@@ -51,12 +54,6 @@ export function cellLookup(x: number, y: number) {
 
 function tick(ev: any) {
 	ev.preventDefault();
-
-	if (running == false) {
-		running = true;
-		save = board;
-		console.log("Now running!")
-	}
 	
 	currentTick += 1;
 	board = tickGame(board);
@@ -66,18 +63,35 @@ function tick(ev: any) {
 }
 
 if (container != null) {
+	// board[3][8] = new Cell("st", "mover", "./../assets/img/cells/mover.png", "Mover", CellDirection.up, MoverScript).export()
+
+	scope.addEventListener("keydown", function(ev) {
+		if (ev.key == "z") {
+			select = cells[1]
+			console.log(select)
+			render(board, container, select)
+		}
+	}, false)
+
+	console.log(cellLookup(8, 3))
 	render(board, container, select)
-	tickElement.addEventListener("click", tick, false)
+	tickElement.addEventListener("click", function(ev) {
+		if (running == false) {
+			running = true;
+			save = board;
+		}
+		console.log(save)
+		tick(ev);
+	}, false)
 
 	restartElement.addEventListener("click", function(ev) {
 		ev.preventDefault();
 
 		if (save != null) {
-			running = false;
+			// running = false;
 			board = save;
 			currentTick = 0;
 			
-			console.log(save)
 			render(board, container, select);
 
 			save = null;

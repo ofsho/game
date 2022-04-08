@@ -5,9 +5,9 @@ export type ImageURI = string
 
 export enum CellDirection {
 	up, // 0
-	left, // 1
+	right, // 3
 	down, // 2
-	right // 3
+	left // 1
 }
 
 export enum SSDirection {

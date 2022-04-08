@@ -2,6 +2,27 @@ import { packString } from "./packer";
 import { emptyCell, render, tokenizeElement } from "./rendering";
 import { CellDirection, SchemeScript, ScriptParameters } from "./types";
 
+export function isOccupied(x: number,y: number,board: string[][]) {
+	return packString(board[y][x]).name != "blank"
+}
+
+export function moveCell(cellX: number, cellY: number, offX: number, offY: number, board: string[][]) {
+	const newX = cellX + offX
+	const newY = cellY + offY
+	if (isOccupied(newX, newY, board)) {
+		console.log("New position occupied, looping!")
+		console.log(`Current X: ${cellX}, Current Y: ${cellY}`)
+
+		moveCell(newX,newY,offX,offY, board)
+	} else {
+		console.log("New position not occupied, moving!")
+		console.log(`Current X: ${cellX}, Current Y: ${cellY}`)
+		
+		board[newY][newX] = board[cellY][cellX]
+		board[cellY][cellX] = emptyCell
+	}
+}
+
 export function handleScript(script: SchemeScript, paremeters: ScriptParameters, board: string[][]) {
 	const update = script.update.split(" ")
 	let { x,y } = paremeters.transform.position
@@ -16,18 +37,17 @@ export function handleScript(script: SchemeScript, paremeters: ScriptParameters,
 						break
 					
 					case 1:
-						board[y][x - 1] = board[y][x]
+						moveCell(x, y, 1, 0, board)
 						break
 					
 					case 2:
 						board[y - 1][x] = board[y][x]
 						break
-					
-					case 3:
-						board[y][x + 1] = board[y][x]
-						break
 
-				}
+					case 3:
+						board[y][x - 1] = board[y][x]
+						break
+					}	
 
 				board[y][x] = emptyCell;
 			}
@@ -54,7 +74,7 @@ export default function tickGame(board: any) {
 								x: i,
 								y: y
 							},
-							rotation: CellDirection.right
+							rotation: parseInt(element.rotation)
 						}
 					},
 					board

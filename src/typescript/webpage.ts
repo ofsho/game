@@ -22,6 +22,9 @@ if (document.getElementById("latest_version") != null) {
 			if (parseInt(versions.latest.split(".").join("")) > parseInt(versions.current.split(".").join(""))) {
 				document.getElementById("latest_version").style.color = "#ff0000"
 			}
+		}).catch(err => {
+			document.getElementById("latest_version").innerHTML = `No internet connection`
+			document.getElementById("latest_version").style.color = "#ff0000"
 		})
 }
 
@@ -75,6 +78,9 @@ if (document.getElementById("update_log")) {
 		.then(data => data.text())
 		.then(data => {
 			ulog.innerHTML = etf2html(data)
+		})
+		.catch(err => {
+			ulog.innerHTML = `<p style="color: #ff0000;">No internet connection</p>\n<p style="color: #ff0000;">Error: ${err}</p>`
 		})
 }
 
