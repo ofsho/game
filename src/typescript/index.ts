@@ -6,9 +6,10 @@ import { render, tokenizeElement } from "./rendering";
 import { DefaultScript, CellDirection } from "./types";
 import { minifyJSON } from "./utils";
 
-
 // variables
 const container: HTMLElement  = document.getElementById("container");
+const controls = document.getElementById("controls");
+const tick = document.getElementById("tick");
 const emptyCell = `st|||blank|||./../assets/img/cells/default.png|||Empty|||${minifyJSON(JSON.stringify(DefaultScript))}`
 
 const board = createGrid(16,16, emptyCell)
@@ -43,4 +44,10 @@ export function cellLookup(x: number, y: number) {
 	return board[y][x]
 }
 
-if (container != null) render(board, container, select)
+if (container != null) {
+	render(board, container, select)
+	tick.addEventListener("click", function(ev) {
+		ev.preventDefault();
+		console.log("tick!")
+	}, false)
+}

@@ -79,59 +79,59 @@ export function render(board: any, container: any, select: Cell) {
 				if (ev.button === 0) {
 					board[y][x] = select.export();
 				}
-				// else if (ev.button === 2) {
-				// 	board[y][x] = emptyCell;
-				// }
+				else if (ev.button === 2) {
+					board[y][x] = emptyCell;
+				}
 
 				// rerender the board
 				render(board, container, select);
 			}, false);
 
-			element.addEventListener('contextmenu', function(ev) {
-				ev.preventDefault();
+			// element.addEventListener('contextmenu', function(ev) {
+			// 	ev.preventDefault();
 
-				// stupid ass code
-				// make it appear
-				ev.preventDefault();
+			// 	// stupid ass code
+			// 	// make it appear
+			// 	ev.preventDefault();
 
-				const { clientX: mouseX, clientY: mouseY } = ev;
+			// 	const { clientX: mouseX, clientY: mouseY } = ev;
 
-				cmenu.style.top = `${mouseY}px`
-				cmenu.style.left = `${mouseX}px`
+			// 	cmenu.style.top = `${mouseY}px`
+			// 	cmenu.style.left = `${mouseX}px`
 
-				cmenu.classList.add("visible")
+			// 	cmenu.classList.add("visible")
 
-				const tokens = tokenizeElement(cellLookup(x,y))
+			// 	const tokens = tokenizeElement(cellLookup(x,y))
 
-				// buttons
-				cmenu.getElementsByClassName("title")[0].textContent = tokens[3].value;
-				if (tokens[1].value == "blank") {
-					cmenu.getElementsByClassName("title")[0].textContent = "Nothing here... :(";
-					// cmenu.getElementsByClassName("delete")[0].style.display = "none";
-					// cmenu.getElementsByClassName("modify")[0].style.display = "none";
-				} else {
-					// cmenu.getElementsByClassName("delete")[0].style.display = "block";
-					// cmenu.getElementsByClassName("modify")[0].style.display = "block";
-				}
+			// 	// buttons
+			// 	cmenu.getElementsByClassName("title")[0].textContent = tokens[3].value;
+			// 	if (tokens[1].value == "blank") {
+			// 		document.getElementById("cmenu-title").textContent = "Nothing here... :(";
+			// 		document.getElementById("cmenu-delete").style.display = "none";
+			// 		// cmenu.getElementsByClassName("modify")[0].style.display = "none";
+			// 	} else {
+			// 		document.getElementById("cmenu-delete").style.display = "block";
+			// 		// cmenu.getElementsByClassName("modify")[0].style.display = "block";
+			// 	}
 
-				cmenu.getElementsByClassName("delete")[0].addEventListener('click', () => {
-					// set the element value to blank save code
-					board[y][x] = emptyCell;
-					cmenu.classList.remove("visible");
-					render(board, container, select); // dont forget to re-render :lol: but this causes lag so use barebone
-				}, false);
+			// 	cmenu.getElementsByClassName("delete")[0].addEventListener('click', () => {
+			// 		// set the element value to blank save code
+			// 		board[y][x] = emptyCell;
+			// 		cmenu.classList.remove("visible");
+			// 		render(board, container, select); // dont forget to re-render :lol: but this causes lag so use barebone
+			// 	}, false);
 
-				cmenu.getElementsByClassName("modify")[0].addEventListener('click', () => {
-					// will fix soon
-					cmenu.classList.remove("visible");
-				}, false)
+			// 	// cmenu.getElementsByClassName("modify")[0].addEventListener('click', () => {
+			// 	// 	// will fix soon
+			// 	// 	cmenu.classList.remove("visible");
+			// 	// }, false)
 
-				cmenu.getElementsByClassName("close")[0].addEventListener('click', () => {
-					cmenu.classList.remove("visible");
-				}, false)
+			// 	cmenu.getElementsByClassName("close")[0].addEventListener('click', () => {
+			// 		cmenu.classList.remove("visible");
+			// 	}, false)
 
-				return false;
-			}, false);
+			// 	return false;
+			// }, false);
 		})
 	})
 }
