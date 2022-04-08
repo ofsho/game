@@ -1,5 +1,5 @@
 // handles the webpage, settings/menu. that shit y'know
-import { version } from '../package.json';
+import { version } from './../../package.json';
 import { etf2html } from "./etf";
 import { splashText } from "./splash";
 import { join } from "path";
