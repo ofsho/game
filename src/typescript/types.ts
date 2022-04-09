@@ -3,9 +3,9 @@
 
 export enum CellDirection {
 	up, // 0
-	right, // 3
+	right, // 1
 	down, // 2
-	left // 1
+	left // 3
 }
 
 export enum SSDirection {
@@ -70,5 +70,29 @@ export const MoverScript: SchemeScript = {
 	collision: {
 		can_collide: true,
 		parameters: {}
+	}
+}
+
+export const RotateScript: SchemeScript = {
+	name: "Mover",
+	save_code: "st|mover",
+	update: "",
+	collision: {
+		can_collide: true,
+		parameters: {
+			"any": "rotate-coll"
+		}
+	}
+}
+
+export const EnemyScript: SchemeScript = {
+	name: "Mover",
+	save_code: "st|mover",
+	update: "",
+	collision: {
+		can_collide: true,
+		parameters: {
+			"any": "self-destroy"
+		}
 	}
 }

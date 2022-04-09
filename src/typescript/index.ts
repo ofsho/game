@@ -4,11 +4,11 @@
 import Cell from "./cells";
 import tickGame from "./game";
 import { render } from "./rendering";
-import { DefaultScript, CellDirection, MoverScript } from "./types";
+import { DefaultScript, CellDirection, MoverScript, Board, EnemyScript } from "./types";
 import { minifyJSON } from "./utils";
 let running: boolean = false;
 let currentTick: number = 0;
-let save: string[][] = null;
+let save: Board = null;
 
 // variables
 const container: HTMLElement  = document.getElementById("container");
@@ -16,14 +16,15 @@ const controls = document.getElementById("controls");
 const scope = document.querySelector("body");
 const tickElement = document.getElementById("tick");
 const restartElement = document.getElementById("restart");
-const emptyCell = `st|||blank|||./../assets/img/cells/default.png|||Empty|||${minifyJSON(JSON.stringify(DefaultScript))}`
+const emptyCell: string = `st|||blank|||./../assets/img/cells/default.png|||Empty|||${minifyJSON(JSON.stringify(DefaultScript))}`
+const cellNotifierElement: any = document.getElementById("cellnotifier");
 
-let board = createGrid(16,16, emptyCell)
+let board: Board = createGrid(16,16, emptyCell)
 let selectRotation: CellDirection = CellDirection.right;
 let selector = 0;
 const cells: Cell[] = [
 	new Cell("st", "mover", "./../assets/img/cells/mover.png", "Mover", selectRotation, MoverScript),
-	new Cell("st", "enemy", "./../assets/img/cells/enemy.png", "Enemy", selectRotation, DefaultScript),
+	new Cell("st", "enemy", "./../assets/img/cells/enemy.png", "Enemy", selectRotation, EnemyScript),
 	new Cell("st", "generator", "./../assets/img/cells/generator.png", "Generator", selectRotation, DefaultScript),
 	new Cell("st", "rotator", "./../assets/img/cells/rotator.png", "Rotator", selectRotation, DefaultScript),
 	new Cell("st", "push", "./../assets/img/cells/push.png", "Push", selectRotation, DefaultScript),
@@ -53,6 +54,12 @@ export function cellLookup(x: number, y: number) {
 	return board[y][x]
 }
 
+function updateCellRotation() {
+	cells.forEach(function(v, i, a) {
+		v.rotation = selectRotation;
+	})
+}
+
 function tick(ev: any) {
 	ev.preventDefault();
 	
@@ -64,10 +71,12 @@ function tick(ev: any) {
 }
 
 if (container != null) {
-	// board[3][8] = new Cell("st", "mover", "./../assets/img/cells/mover.png", "Mover", CellDirection.up, MoverScript).export()
+	cellNotifierElement.style.transform = `rotate(${90 * selectRotation}deg)`;
+	cellNotifierElement.src = select.image;
 
 	scope.addEventListener("keydown", function(ev) {
-		if (ev.key == "z") {
+
+		if (ev.key == "z" && ev.ctrlKey == false) {
 			selector++;
 			if (cells[selector] != null || undefined) {
 				select = cells[selector]
@@ -76,8 +85,27 @@ if (container != null) {
 				select = cells[selector]
 			}
 			console.log(select)
-			render(board, container, select)
+			cellNotifierElement.src = select.image;
+		}else if (ev.key == "z" && ev.ctrlKey == true) {
+			selector--;
+			if (cells[selector] != null || undefined) {
+				select = cells[selector]
+			} else {
+				selector = cells.length - 1
+				select = cells[selector]
+			}
+			console.log(select)
+			cellNotifierElement.src = select.image;
+		}else if (ev.key == "r" && ev.ctrlKey == false) {
+			selectRotation++;
+			if (selectRotation > 3) {
+				selectRotation = 0
+			}
+			cellNotifierElement.style.transform = `rotate(${90 * selectRotation}deg)`;
 		}
+
+		updateCellRotation()
+		render(board, container, select)
 	}, false)
 
 	render(board, container, select)
