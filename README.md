@@ -6,7 +6,7 @@ Once the game is in a playable state, you can download it from the releases. Oth
 
 First, clone the repo
 ```bash
-git clone https://github.com/Schematell/game.githttps://github.com/Schematell/game.githttps://github.com/Schematell/game.git
+git clone https://github.com/Schematell/game.git
 cd Schematell
 ```
 
